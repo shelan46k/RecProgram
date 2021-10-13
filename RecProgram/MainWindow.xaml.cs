@@ -48,7 +48,7 @@ namespace RecProgram
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            checkbox_自動開機.IsChecked = Properties.Settings.Default.自動開機;
+            
             System.Windows.Threading.DispatcherTimer ShowTimer = new System.Windows.Threading.DispatcherTimer();
             ShowTimer.Tick += new EventHandler(ShowCurTimer);
             ShowTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
@@ -114,55 +114,6 @@ namespace RecProgram
             HandyControl.Controls.Dialog.Show(new 設定時間UserControl());
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            #region 設定開機自啟
-            try
-            {
-                string strName = AppDomain.CurrentDomain.BaseDirectory + "RecProgram.exe";//獲取要自動執行的應用程式名，也就是本程式的名稱
-                if (!System.IO.File.Exists(strName))//判斷要自動執行的應用程式檔案是否存在
-                    return;
-                string strnewName = strName.Substring(strName.LastIndexOf("\\") + 1);//獲取應用程式檔名，不包括路徑
-                RegistryKey registry = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);//檢索指定的子項
-                if (registry == null)//若指定的子項不存在
-                    registry = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");//則建立指定的子項
-                registry.SetValue(strnewName, strName);//設定該子項的新的“鍵值對”
-                registry.Close();
-                //MessageBox.Show("開機自啟設定成功！");
-                Properties.Settings.Default.自動開機 = true;
-                Properties.Settings.Default.Save();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            #endregion
-        }
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            #region 取消開機自啟
-            try
-            {
-                string strName = AppDomain.CurrentDomain.BaseDirectory + "RecProgram.exe";//獲取要自動執行的應用程式名
-                if (!System.IO.File.Exists(strName))//判斷要取消的應用程式檔案是否存在
-                    return;
-                string strnewName = strName.Substring(strName.LastIndexOf("\\") + 1);///獲取應用程式檔名，不包括路徑
-                RegistryKey registry = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);//讀取指定的子項
-                if (registry == null)//若指定的子項不存在
-                    registry = Registry.LocalMachine.CreateSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run");//則建立指定的子項
-                registry.DeleteValue(strnewName, false);//刪除指定“鍵名稱”的鍵/值對
-                registry.Close();
-                //MessageBox.Show("取消開機自啟。");
-                Properties.Settings.Default.自動開機 = false;
-                Properties.Settings.Default.Save();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            #endregion
-
-        }
     }
 }

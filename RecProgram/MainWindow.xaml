@@ -41,10 +41,7 @@
                 </Menu>
             </Border>
             <Border Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <WrapPanel>
-                    <CheckBox x:Name="checkbox_自動開機" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-                    <Label Content="開機自動啟動" BorderThickness="0" />
-                </WrapPanel>
+
             </Border>
             <Border Grid.Row="1">
                 <Grid>

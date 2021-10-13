@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="2.5*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0">
             <Grid>
@@ -33,6 +34,17 @@
             </Grid>
         </Border>
         <Border Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0">
+                    <CheckBox x:Name="checkbox_自動開機" Content="開機自動啟動"/>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
